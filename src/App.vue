@@ -9,8 +9,12 @@
       <div class="row" v-for="(task, index) in tasks" v-bind:key="index">
         <!-- <div class="col">{{ task }}</div> -->
         <!-- <div class="col">{{ index }}</div> -->
-        <div class="col">{{ task.action }}</div>
-        <div class="col-2">{{ task.done }}</div>
+        <!-- <div class="col-2">{{ task.done }}</div> -->
+        
+        <div class="col" :class="task.done ? 'delete':''">{{ task.action }}</div>
+        <div class="col-2">
+          <input  type="checkbox" v-model="task.done">
+        </div>
       </div>
     </div>
   </div>
@@ -33,5 +37,7 @@
 </script>
 
 <style>
-
+  .delete {
+    text-decoration: line-through;
+  }
 </style>
