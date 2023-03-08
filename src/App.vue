@@ -6,7 +6,7 @@
         <div class="col fs-3">Tasks</div>
         <div class="col-2 fs-3">Done</div>
       </div>
-      <div class="row" v-for="(task, index) in tasks" v-bind:key="index">
+      <div class="row" v-for="(task, index) in filterTask" v-bind:key="index">
         <!-- <div class="col">{{ task }}</div> -->
         <!-- <div class="col">{{ index }}</div> -->
         <!-- <div class="col-2">{{ task.done }}</div> -->
