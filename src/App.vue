@@ -10,11 +10,15 @@
         <!-- <div class="col">{{ task }}</div> -->
         <!-- <div class="col">{{ index }}</div> -->
         <!-- <div class="col-2">{{ task.done }}</div> -->
-        
+
         <div class="col" :class="task.done ? 'delete':''">{{ task.action }}</div>
         <div class="col-2">
           <input  type="checkbox" v-model="task.done">
         </div>
+      </div>
+      <div class="bg-danger text-white text-center p-2 mt-4 d-flex justify-content-around">
+        <h5>Hide Completed Tasks</h5>
+        <input type="checkbox" v-model="hideCompletedTask">
       </div>
     </div>
   </div>
@@ -25,6 +29,7 @@
     name:'App',
     data: () => ({
       name:"Kyaw Kyaw",
+      hideCompletedTask:false,
       tasks: [
         {action:"Buy new phone", done:false},
         {action:"Get Shoes", done:true},
@@ -33,6 +38,11 @@
         {action:"Buy new Phone", done:true},
       ]
     }),
+    computed : {
+      filterTask() {
+        return this.hideCompletedTask ? this.tasks.filter((v) => !v.done) : this.tasks;
+      }
+    }
   }
 </script>
 
