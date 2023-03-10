@@ -9,6 +9,9 @@
         <div class="col">
           <input type="button" value="Add Task" class="btn btn-secondary" v-on:click="addTasks">
         </div>
+        <div class="col">
+          <input type="button" value="Delete Tasks" class="btn btn-warning" @click="deleteTasks">
+        </div>
       </div>
 
       <div v-if="filterTask.length > 0">
@@ -47,13 +50,7 @@
       title:"CODE LAB",
       hideCompletedTask:false,
       newTask:'',
-      tasks: [
-        {action:"Buy new phone", done:false},
-        {action:"Get Shoes", done:true},
-        {action:"Call Aung Aung", done:false},
-        {action:"Buy new Shirt", done:false},
-        {action:"Buy new Phone", done:true},
-      ]
+      tasks: []
     }),
     computed : {
       filterTask() {
@@ -76,25 +73,40 @@
           done:false,
         });
 
-        localStorage.setItem('myLocalTasks', JSON.stringify(this.tasks));
+        this.storeData();
         this.newTask = '';
       },
+
+      deleteTasks() {
+        this.tasks = this.tasks.filter(v => !v.done);
+        this.storeData();
+      },
+
+      storeData() {
+        localStorage.setItem('myLocalTasks', JSON.stringify(this.tasks));
+      }
     },
 
-    beforeCreate(){
-    console.log('before created running');
-    },
-    mounted(){
-      console.log('mounted running');
-    },
-    beforeMount(){
-      console.log('before mounted running');
-    },
-    created(){
-      console.log('created running');
-    },
+    // beforeCreate(){
+    // console.log('before created running');
+    // },
+    // mounted(){
+    //   console.log('mounted running');
+    // },
+    // beforeMount(){
+    //   console.log('before mounted running');
+    // },
+    // created(){
+    //   console.log('created running');
+    // },
 
-    // mounted() {},
+    mounted() {
+      let data = localStorage.getItem('myLocalTasks');
+      // console.log(data);
+      if(data !== null) {
+        this.tasks = JSON.parse(data);
+      }
+    },
 
   }
 </script>
